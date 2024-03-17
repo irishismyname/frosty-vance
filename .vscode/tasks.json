@@ -1,0 +1,48 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "start a picocom session",
+            "type": "shell",
+            "command": "picocom",
+            "args": [
+                "/dev/ttyUSB0",
+                "-b115200"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "put boot.py",
+            "type": "shell",
+            "command": "ampy",
+            "args": [
+                "--port",
+                "/dev/ttyUSB0",
+                "put",
+                "${workspaceFolder}/src/boot.py"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "put main.py",
+            "type": "shell",
+            "command": "ampy",
+            "args": [
+                "--port",
+                "/dev/ttyUSB0",
+                "put",
+                "${workspaceFolder}/src/main.py"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "put and start picocom",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": ["put boot.py", "put main.py", "start a picocom session"],
+            "problemMatcher": []
+        }
+    ]
+}
