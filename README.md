@@ -2,50 +2,24 @@
 
 ## Environment Setup
 
-First you need `esptool` to install the micropython firmware for ESP32/WROOM
+1. Install [homebrew](https://brew.sh)
 
-```bash
-pip install esptool
-```
+1. Install `arudino-cli`: `brew install arduino-cli`
 
-Identify the port (usually `/dev/ttyUSB0`)
+1. Add the Espressif package index:
 
-```bash
-dmesg | grep tty
-```
+    ```bash
+    arduino-cli config add board_manager.additional_urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+    ```
 
-Erase the flash: [micropython installation instructions](https://micropython.org/download/ESP32_GENERIC/)
+1. Update the core index: `arduino-cli core update-index`
 
-```bash
-esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash
-```
+1. Install the `esp32:esp32` core: `arduino-cli core install esp32:esp32`
 
-Download the latest firmware
+    If this worked, you should have the latest from Espressif's [releases page](https://github.com/espressif/arduino-esp32/releases).
 
-```bash
-curl -o ./bin/firmware.bin https://micropython.org/resources/firmware/ESP32_GENERIC-20240222-v1.22.2.bin
-```
+1. Upload the sketch:
 
-Erase and write flash
-
-```bash
-esptool.py --port /dev/ttyUSB0 erase_flash
-```
-
-```bash
-esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 write_flash -z 0x1000 ./bin/firmware.bin
-```
-
-Start a picocom session to get the Python REPL
-
-```bash
-picocom /dev/ttyUSB0 -b115200
-```
-
-Exit with ctrl+a then ctrl+x
-
-Install the stubs for the firmware
-
-```bash
-pip install -U micropython-esp32-stubs==1.22.0.* --no-user --target .vscode/Pico-W-Stub
-```
+    ```bash
+    arduino-cli upload ./frosty/frosty.ino -p /dev/ttyUSB0 -b esp32:esp32:esp32
+    ```

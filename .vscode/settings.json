@@ -1,16 +1,7 @@
 {
-    "python.linting.enabled": true,
-    "python.languageServer": "Pylance",
-    "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.diagnosticSeverityOverrides": {
-        "reportMissingModuleSource": "none"
-    },
-    "micropico.syncFolder": "",
-    "micropico.openOnStart": true,
-    "python.analysis.typeshedPaths": [
-        ".vscode/Pico-W-Stub"
+    "arduino.additionalUrls": [
+        "https://dl.espressif.com/dl/package_esp32_index.json"
     ],
-    "python.analysis.extraPaths": [
-        ".vscode/Pico-W-Stub"
-    ]
+    "arduino.commandPath": "arduino-cli",
+    "arduino.path": "/home/linuxbrew/.linuxbrew/bin"
 }
